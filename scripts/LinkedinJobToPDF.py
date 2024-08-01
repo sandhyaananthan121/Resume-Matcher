@@ -3,10 +3,10 @@ from os import listdir
 from os.path import isfile, join
 
 import easygui
-import requests
 from bs4 import BeautifulSoup
 from pathvalidate import sanitize_filename
 from xhtml2pdf import pisa
+from security import safe_requests
 
 """
 This script takes a LinkedIn job posting URL
@@ -26,7 +26,7 @@ def linkedin_to_pdf(job_url: str):
     files_number = len([f for f in listdir(job_path) if isfile(join(job_path, f))])
 
     try:
-        page = requests.get(job_url)
+        page = safe_requests.get(job_url)
 
         if page.status_code != 200:
             print(
