@@ -26,7 +26,7 @@ def linkedin_to_pdf(job_url: str):
     files_number = len([f for f in listdir(job_path) if isfile(join(job_path, f))])
 
     try:
-        page = requests.get(job_url)
+        page = requests.get(job_url, timeout=60)
 
         if page.status_code != 200:
             print(
